@@ -41,23 +41,40 @@ export function deactivate() {
   }
 }
 
+function prettyTime(seconds: number): string {
+  const hrs = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+
+  let result = '';
+  if (hrs > 0) {
+      result += `${hrs}h `;
+  }
+  if (mins > 0) {
+      result += `${mins}m `;
+  }
+  result += `${secs}s`;
+
+  return result;
+}
+
 function initializeClockStatusBarItem() {
   clockStatusBarItem = vscode.window.createStatusBarItem(STATUS_BAR_ALIGNMENT, STATUS_BAR_PRIORITY);
-  clockStatusBarItem.text = "$(watch) Ready";
+  clockStatusBarItem.text = "$(watch)";
   clockStatusBarItem.show();
 }
 
 function startCountdown(duration: number) {
   let remainingTime = duration;
-	clockStatusBarItem.text = `$(watch) ${remainingTime}s`;
+	clockStatusBarItem.text = `$(watch) ${prettyTime(remainingTime)}`;
   clearInterval(countdownTimer);
   countdownTimer = setInterval(() => {
     if (remainingTime <= 0) {
       clearInterval(countdownTimer);
-      clockStatusBarItem.text = `$(watch) Ready`;
+      clockStatusBarItem.text = `$(watch)`;
     } else {
 			remainingTime--;
-      clockStatusBarItem.text = `$(watch) ${remainingTime}s`;
+      clockStatusBarItem.text = `$(watch) ${prettyTime(remainingTime)}`;
     }
   }, INTERVAL_MILLISECONDS);
 }
