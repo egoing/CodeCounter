@@ -1,7 +1,12 @@
 {
-  "name": "tick-tock-code",
-  "displayName": "tick-tock-code",
-  "description": "",
+  "name": "CodeCounter",
+  "displayName": "CodeCounter",
+  "description": "CodeCounter is a Visual Studio Code extension that accurately tracks and counts down the time spent on code modification. It is a tool for educators to quantitatively measure the practice time given to students, and for students to check how much practice time remains. Each time you modify the code, the time counts up (default is 0.5 seconds), and when you save it, the accumulated time counts down.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egoing/CodeCounter.git"
+  },
+  "homepage": "https://github.com/egoing/CodeCounter#readme",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.79.0"
@@ -15,10 +20,6 @@
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "tick-tock-code.helloWorld",
-        "title": "Hello World"
-      },
       {
         "command": "extension.changeTypingDelta",
         "title": "Change Typing Delta"
