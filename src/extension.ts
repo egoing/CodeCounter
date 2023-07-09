@@ -20,6 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.workspace.onDidChangeTextDocument((event: vscode.TextDocumentChangeEvent) => {
     if (event.contentChanges.length > 0) {
       typingIncrement += DEFAULT_TYPING_INCREMENT;
+      clockStatusBarItem.text = `$(watch) ${prettyTime(typingIncrement)}`;
     }
   });
 
@@ -44,19 +45,21 @@ export function deactivate() {
 function prettyTime(seconds: number): string {
   const hrs = Math.floor(seconds / 3600);
   const mins = Math.floor((seconds % 3600) / 60);
-  const secs = seconds % 60;
+  let secs:any = seconds % 60;
+  secs = secs.toFixed(1);  // 소수점 첫째자리까지 포함하도록 변경
 
   let result = '';
   if (hrs > 0) {
-      result += `${hrs}h `;
+    result += `${hrs}h `;
   }
   if (mins > 0) {
-      result += `${mins}m `;
+    result += `${mins}m `;
   }
   result += `${secs}s`;
 
   return result;
 }
+
 
 function initializeClockStatusBarItem() {
   clockStatusBarItem = vscode.window.createStatusBarItem(STATUS_BAR_ALIGNMENT, STATUS_BAR_PRIORITY);
