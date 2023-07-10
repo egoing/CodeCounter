@@ -8,15 +8,12 @@
   },
   "homepage": "https://github.com/egoing/CodeCounter#readme",
   "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.79.0"
-  },
-  "categories": [
+  "publisher":"egoing", "engines": { "vscode": "^1.79.1" }, "categories": [
     "Other"
   ],
   "activationEvents": [
-    "*"
-  ],
+    "onStartupFinished"
+],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
